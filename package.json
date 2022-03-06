@@ -1,12 +1,21 @@
 {
-  "name": "exercise",
+  "name": "adobe_exercise",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Adobe & AEM Engineering Test",
+  "main": "bin/www",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "TODO"
+  },
+  "keywords": [
+    "adobe",
+    "aem",
+    "engineering",
+    "test"
+  ],
+  "author": "Gerald Prendi",
   "license": "ISC"
 }
