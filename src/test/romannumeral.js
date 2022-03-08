@@ -122,7 +122,7 @@ describe('FUNCTION decimalToRoman: converting decimal numbers to romannumerals',
             done();
         });
 
-        it('decimalToRoman(3999) should return CCLV', (done) => {
+        it('decimalToRoman(3999) should return MMMCMXCIX', (done) => {
             expect(decimalToRoman(3999)).to.equal('MMMCMXCIX');
             done();
         })
