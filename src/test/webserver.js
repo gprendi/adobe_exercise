@@ -21,7 +21,7 @@ describe('GET /romannumeral', () => {
             (err, res) => {
                if (err) return done(err);
                res.body.should.have.property('error');
-               expect(res.body.error).to.equal('Only numbers between 1 and 255 can be converted to roman numerals');
+               expect(res.body.error).to.equal('Cannot convert number out of range 1-255');
                done();
             }
          )
@@ -35,7 +35,7 @@ describe('GET /romannumeral', () => {
             (err, res) => {
                if (err) return done(err);
                res.body.should.have.property('error');
-               expect(res.body.error).to.equal('Only numbers between 1 and 255 can be converted to roman numerals');
+               expect(res.body.error).to.equal('Cannot convert number out of range 1-255');
                done();
             }
          )
@@ -49,7 +49,7 @@ describe('GET /romannumeral', () => {
             (err, res) => {
                if (err) return done(err);
                res.body.should.have.property('error');
-               expect(res.body.error).to.equal('Only numbers between 1 and 255 can be converted to roman numerals');
+               expect(res.body.error).to.equal('Cannot convert number out of range 1-255');
                done();
             }
          )
