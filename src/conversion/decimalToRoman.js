@@ -1,3 +1,6 @@
+
+// TODO refactor with custom errors
+// TODO documentation
 function decimalToRoman (num) {
   function toRoman (number) {
     let roman = ''
@@ -8,23 +11,23 @@ function decimalToRoman (num) {
     // start from the last one, and work backwards
     let i = 8
     while (number > 0) {
-      let div = Math.floor(number / num[i])
-      number = number % num[i]
+      let div = Math.floor(number / num[i]);
+      number = number % num[i];
       while (div--) {
-        roman += sym[i]
+        roman += sym[i];
       }
-      i--
+      i--;
     }
 
-    return roman
+    return roman;
   }
 
-  if (num === undefined) throw new Error('Should be called with a parameter')
-  if (typeof num !== 'number') throw new Error('Only numbers can be converted')
+  if (num === undefined) throw new Error('Should be called with a parameter');
+  if (typeof num !== 'number') throw new Error('Only numbers can be converted');
 
   // only positive numbers can be converted
   // imposing a limit on maximum value
-  if (num < 1 || num > 255) throw new Error('Only positive numbers between 1 and 255 can be converted')
+  if (num < 1 || num > 255) throw new Error('Only positive integers between 1 and 255 can be converted.');
 
   return toRoman(num)
 }

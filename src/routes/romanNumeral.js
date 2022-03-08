@@ -20,9 +20,8 @@ router.get('/', (req, res) => {
     try {
       result = decimalToRoman(decimal)
     } catch (err) {
-      console.log(err)
       res.status(400).json({
-        error: err
+        error: err.message
       })
       return
     }

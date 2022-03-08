@@ -1,19 +1,21 @@
 const { assert, expect } = require('chai');
-
-const server_uri = 'http://localhost:3000'
+const should = require('chai').should();
+require('dotenv').config();
+const server_uri = `http://localhost:${process.env.PORT || '8080'}`;
+console.log(server_uri)
 const request = require('supertest').agent(server_uri);
 
-describe('GET /romannumerals', () => {
+describe('GET /romannumeral', () => {
    
    it("calling without a 'query' should return a client error", (done) => {
         request
-        .get(`${server_uri}/romannumerals`)
+        .get(`/romannumeral`)
         .expect(400, done)
    });
    
    it('calling query with the number 0', (done) => {
          request
-         .get(`${server_uri}/romannumerals?query=0`)
+         .get(`/romannumeral?query=0`)
          .expect(400)
          .end(
             (err, res) => {
@@ -27,7 +29,7 @@ describe('GET /romannumerals', () => {
 
    it('calling query outside of the range (greater than) ', (done) => {
       request
-         .get(`${server_uri}/romannumerals?query=0`)
+         .get(`/romannumeral?query=0`)
          .expect(400)
          .end(
             (err, res) => {
@@ -41,7 +43,7 @@ describe('GET /romannumerals', () => {
 
    it('calling query outside of the range (smaller than) ', (done) => {
       request
-         .get(`${server_uri}/romannumerals?query=0`)
+         .get(`/romannumeral?query=0`)
          .expect(400)
          .end(
             (err, res) => {
@@ -55,7 +57,7 @@ describe('GET /romannumerals', () => {
 
    it('calling query with a number in the range should return OK', (done) => {
       request
-      .get(`${server_uri}/romannumerals?query=10`)
+      .get(`/romannumeral?query=10`)
       .expect(200)
       .end(
          (err, res) => {

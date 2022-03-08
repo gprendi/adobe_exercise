@@ -16,8 +16,8 @@ describe('decimalToRoman: converting decimal numbers to romannumerals', () => {
     })
 
     it('calling with a parameter that is a number but outside of range 1 - 255 should fail', (done) => {
-        expect(() => decimalToRoman(0)).to.throw('Only positive numbers between 1 and 255 can be converted');
-        expect(() => decimalToRoman(256)).to.throw('Only positive numbers between 1 and 255 can be converted');
+        expect(() => decimalToRoman(0)).to.throw('Only positive integers between 1 and 255 can be converted');
+        expect(() => decimalToRoman(256)).to.throw('Only positive integers between 1 and 255 can be converted');
 
         done();
     })
