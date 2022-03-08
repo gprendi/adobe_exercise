@@ -3,13 +3,13 @@
 // TODO documentation
 function decimalToRoman (num) {
   function toRoman (number) {
-    let roman = ''
+    let roman = '';
 
-    const num = [1, 4, 5, 9, 10, 40, 50, 90, 100]
-    const sym = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C']
+    const num = [1, 4, 5, 9, 10, 40, 50, 90, 100];
+    const sym = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C'];
 
     // start from the last one, and work backwards
-    let i = 8
+    let i = 8;
     while (number > 0) {
       let div = Math.floor(number / num[i]);
       number = number % num[i];
@@ -29,7 +29,7 @@ function decimalToRoman (num) {
   // imposing a limit on maximum value
   if (num < 1 || num > 255) throw new Error('Only positive integers between 1 and 255 can be converted.');
 
-  return toRoman(num)
+  return toRoman(num);
 }
 
-module.exports.decimalToRoman = decimalToRoman
+module.exports.decimalToRoman = decimalToRoman;
