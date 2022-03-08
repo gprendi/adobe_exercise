@@ -1,21 +1,28 @@
 const { assert, expect } = require('chai');
 const { decimalToRoman } = require('../conversion/decimalToRoman');
 const { OutOfRangeError, InvalidInputError, MissingParameterError } = require('../conversion/conversionErrors');
-describe('decimalToRoman: converting decimal numbers to romannumerals', () => {
+describe('FUNCTION decimalToRoman: converting decimal numbers to romannumerals', () => {
     
-    it('calling with no parameters should fail', (done) => {
+    it('calling with no parameters should throw MissingParameterError', (done) => {
         expect(() => decimalToRoman()).to.throw(MissingParameterError);
         done();
     })
 
-    it('calling with a parameter that is not a number should fail', (done) => {
+    it('calling with a parameter that is not a number should throw InvalidInputError', (done) => {
         expect(() => decimalToRoman("notANumber")).to.throw(InvalidInputError);
         expect(() => decimalToRoman([])).to.throw(InvalidInputError);
         expect(() => decimalToRoman({})).to.throw(InvalidInputError);
         done();
     })
 
-    it('calling with a parameter that is a number but outside of range 1 - 255 should fail', (done) => {
+    it('calling with a parameter that is a float number should throw InvalidInputError', (done) => {
+        expect(() => decimalToRoman(1.5)).to.throw(InvalidInputError);
+        expect(() => decimalToRoman(-0.5)).to.throw(InvalidInputError);
+        expect(() => decimalToRoman(256.5)).to.throw(InvalidInputError);
+        done(); 
+    });
+
+    it('calling with a parameter that is a number but outside of range 1 - 255 should throw OutOfRangeError', (done) => {
         expect(() => decimalToRoman(0)).to.throw(OutOfRangeError);
         expect(() => decimalToRoman(256)).to.throw(OutOfRangeError);
 

@@ -31,6 +31,10 @@ function decimalToRoman (num) {
     throw new InvalidInputError('Cannot convert non-number to roman');
   }
 
+  if (num - Math.ceil(num) !== 0) {
+    throw new InvalidInputError('Cannot convert float to roman');
+  }
+
   // only positive numbers can be converted
   // imposing a limit on maximum value
   if (num < 1 || num > 255) {

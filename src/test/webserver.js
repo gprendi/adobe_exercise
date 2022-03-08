@@ -7,13 +7,13 @@ const request = require('supertest').agent(server_uri);
 
 describe('GET /romannumeral', () => {
    
-   it("calling without a 'query' should return a client error", (done) => {
+   it("calling without a 'query' should return a client error should return 400", (done) => {
         request
         .get(`/romannumeral`)
         .expect(400, done)
    });
    
-   it('calling query with the number 0', (done) => {
+   it('calling query with the number 0 should return 400', (done) => {
          request
          .get(`/romannumeral?query=0`)
          .expect(400)
@@ -27,7 +27,7 @@ describe('GET /romannumeral', () => {
          )
    });
 
-   it('calling query outside of the range (greater than) ', (done) => {
+   it('calling query outside of the range (greater than) should return 400', (done) => {
       request
          .get(`/romannumeral?query=0`)
          .expect(400)
@@ -41,7 +41,7 @@ describe('GET /romannumeral', () => {
          )
    });
 
-   it('calling query outside of the range (smaller than) ', (done) => {
+   it('calling query outside of the range (smaller than) should return 400', (done) => {
       request
          .get(`/romannumeral?query=0`)
          .expect(400)
@@ -55,7 +55,21 @@ describe('GET /romannumeral', () => {
          )
    });
 
-   it('calling query with a number in the range should return OK', (done) => {
+   it('calling query a float number should return 400', (done) => {
+      request
+         .get(`/romannumeral?query=0.5`)
+         .expect(400)
+         .end(
+            (err, res) => {
+               if (err) return done(err);
+               res.body.should.have.property('error');
+               expect(res.body.error).to.equal('Only integers can be converted to roman numerals');
+               done();
+            }
+         )
+   })
+
+   it('calling query with a number in the range should return 200', (done) => {
       request
       .get(`/romannumeral?query=10`)
       .expect(200)
@@ -73,4 +87,34 @@ describe('GET /romannumeral', () => {
    });
 
 
+});
+
+describe('GET a route that does not exist', () => {
+   it('GET /wrong should return 404', (done) => {
+      request
+      .get('/wrong')
+      .expect(404)
+      .end(
+         (err, res) => {
+            if (err) return done(err);
+            res.body.should.have.property('message');
+            expect(res.body.message).to.equal('Not Found');
+            done();
+         }
+      )
+   });
+
+   it('GET /wrong?query=100 should return 404', (done) => {
+      request
+      .get('/wrong')
+      .expect(404)
+      .end(
+         (err, res) => {
+            if (err) return done(err);
+            res.body.should.have.property('message');
+            expect(res.body.message).to.equal('Not Found');
+            done();
+         }
+      )
+   });
 });
