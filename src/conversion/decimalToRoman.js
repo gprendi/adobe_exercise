@@ -1,3 +1,4 @@
+const { OutOfRangeError, InvalidInputError, MissingParameterError } = require('./conversionErrors');
 
 // TODO refactor with custom errors
 // TODO documentation
@@ -22,12 +23,19 @@ function decimalToRoman (num) {
     return roman;
   }
 
-  if (num === undefined) throw new Error('Should be called with a parameter');
-  if (typeof num !== 'number') throw new Error('Only numbers can be converted');
+  if (num === undefined) {
+    throw new MissingParameterError('Cannot convert undefined to roman');
+  }
+
+  if (typeof num !== 'number') {
+    throw new InvalidInputError('Cannot convert non-number to roman');
+  }
 
   // only positive numbers can be converted
   // imposing a limit on maximum value
-  if (num < 1 || num > 255) throw new Error('Only positive integers between 1 and 255 can be converted.');
+  if (num < 1 || num > 255) {
+    throw new OutOfRangeError('Cannot convert number out of range 1-255');
+  }
 
   return toRoman(num);
 }
