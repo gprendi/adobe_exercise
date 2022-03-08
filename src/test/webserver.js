@@ -1,3 +1,8 @@
+/**
+ * @namespace HttpServerTesting
+ * @description Testing for http server's routes
+ */
+
 const { assert, expect } = require('chai');
 const should = require('chai').should();
 require('dotenv').config();
@@ -5,6 +10,11 @@ const server_uri = `http://localhost:${process.env.PORT || '8080'}`;
 console.log(server_uri)
 const request = require('supertest').agent(server_uri);
 
+/**
+ * @function testHttpServerRomanNumeral
+ * @description Tests suite for http server's GET /romannumeral
+ * @memberof HttpServerTesting
+ */
 describe('GET /romannumeral', () => {
    
    it("calling without a 'query' should return a client error should return 400", (done) => {
@@ -89,6 +99,11 @@ describe('GET /romannumeral', () => {
 
 });
 
+/**
+ * @function testHttpServerWrong
+ * @description Tests suite for http server's GET /wrong
+ * @memberof HttpServerTesting
+ */
 describe('GET a route that does not exist', () => {
    it('GET /wrong should return 404', (done) => {
       request

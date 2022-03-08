@@ -12,7 +12,23 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-        "semi": [2, "always"]
+        "semi": [2, "always"],
+        "arrow-spacing": "off",
+        "no-multi-spaces": "off",
+        "no-multiple-empty-lines": "off",
+        "indent": ["warn", 4],
+        "no-unused-vars": "warn",
+        "no-trailing-spaces": "warn",
+        "padded-blocks": "warn",
+        "quotes": "warn",
+        "spaced-comment": "warn",
+        "node/no-path-concat": "off",
+        "eol-last": "warn",
+        "no-new-wrappers": "off",
+        "no-useless-escape": "off",
+        "no-undef": "warn",
+        "space-before-function-paren": "warn",
+        "quote-props": "warn"
     },
     "ignorePatterns": ["src/test/*"]
 }
