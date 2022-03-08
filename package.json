@@ -4,7 +4,12 @@
   "description": "Adobe & AEM Engineering Test",
   "main": "bin/www",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www",
+    "test": "npm run lint && NODE_ENV=test mocha --exit ./src/test",
+    "lint": "npx eslint ./src",
+    "lint:fix": "npx eslint --fix ./src",
+    "docs": "npx jsdoc -d docs -r --verbose ./src && echo '\n<-> Documentation created and stored in ./docs <->\n'",
+    "test:nolint": "NODE_ENV=test mocha --exit ./src/test"
   },
   "repository": {
     "type": "git",
@@ -28,6 +33,8 @@
   },
   "dependencies": {
     "chai": "4.3.6",
-    "mocha": "9.2.1"
+    "express": "4.17.3",
+    "mocha": "9.2.1",
+    "supertest": "6.2.2"
   }
 }

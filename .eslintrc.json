@@ -12,6 +12,7 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-        "ignorePatterns": ["src/test/*"]
-    }
+        "semi": "off"
+    },
+    "ignorePatterns": ["src/test/*"]
 }
