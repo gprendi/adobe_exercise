@@ -7,7 +7,6 @@ const { assert, expect } = require('chai');
 const should = require('chai').should();
 require('dotenv').config();
 const server_uri = `http://localhost:${process.env.PORT || '8080'}`;
-console.log(server_uri)
 const request = require('supertest').agent(server_uri);
 
 /**
@@ -98,6 +97,48 @@ describe('GET /romannumeral', () => {
 
 
 });
+
+describe('GET /romannumeral with ranges', () => {
+   it('GET /romannumeral with min and no max should return 400', (done) => {
+      request
+        .get(`/romannumeral?min=10`)
+        .expect(400, done)
+   })
+
+   it('GET /romannumeral with no min and max should return 400', (done) => {
+      request
+        .get(`/romannumeral?max=10`)
+        .expect(400, done)
+   })
+
+   it('GET /romannumeral with min greater than max should return 400', (done) => {
+      request
+        .get(`/romannumeral?min=10&max=5`)
+        .expect(400, done)
+   })
+   
+   it('GET /romannumeral with min as a float and max should return 400', (done) => {
+      request
+        .get(`/romannumeral?min=10.5&max=15`)
+        .expect(400, done)
+   })
+
+   it('GET /romannumeral with min and max should return 200', (done) => {
+      request
+        .get(`/romannumeral?min=10&max=15`)
+        .expect(200)
+        .end((err, res) => {
+           if (err) done(err);
+
+           res.body.should.have.property('conversions');
+           expect(res.body.conversions).to.be.an('array');
+           expect(res.body.conversions.length).to.equal(6);
+
+           done();
+         });      
+   })
+})
+
 
 /**
  * @function testHttpServerWrong

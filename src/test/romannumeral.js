@@ -3,10 +3,13 @@
  * @description Testing for decimal to roman numeral conversion
  */
 
-const { assert, expect } = require('chai');
-const { decimalToRoman } = require('../conversion/decimalToRoman');
-const { OutOfRangeError, InvalidInputError, MissingParameterError } = require('../conversion/conversionErrors');
 
+const chai = require('chai')
+const { assert, expect } = chai;
+const { decimalToRoman, calculateRange } = require('../conversion/decimalToRoman');
+const { OutOfRangeError, InvalidInputError, MissingParameterError, InvalidRangeError } = require('../conversion/conversionErrors');
+
+chai.use(require('chai-as-promised'));
 /**
  * @function testDecimalToRoman
  * @description Tests suite for decimal to roman numeral conversion
@@ -129,4 +132,41 @@ describe('FUNCTION decimalToRoman: converting decimal numbers to romannumerals',
     })
 
     
+});
+
+describe('FUNCTION calculateRange: batch convert from a min to max', () => {
+
+    it('calling with no parameters should throw MissingParameterError', async () => {
+        expect(calculateRange()).to.eventually.throw(MissingParameterError);
+    })
+
+    it('calling with non-number parameters should throw InvalidInputError', async () => {
+        expect(calculateRange("notANumber", "notANumber")).to.eventually.throw(InvalidInputError);
+        expect(calculateRange([], [])).to.eventually.throw(InvalidInputError);
+        expect(calculateRange({}, {})).to.eventually.throw(InvalidInputError);
+    })
+
+    it('calling with a float number should throw InvalidInputError', async () => {
+        expect(calculateRange(1.5, 10.5)).to.eventually.throw(InvalidInputError);
+        expect(calculateRange(-0.5, -10.5)).to.eventually.throw(InvalidInputError);
+        expect(calculateRange(265.5, 300.5)).to.eventually.throw(InvalidInputError);
+        expect(calculateRange(4000.5, 4001.5)).to.eventually.throw(InvalidInputError);
+    })
+
+    it('calling with a number outside of range 1 - 3999 should throw OutOfRangeError', async () => {
+        expect(calculateRange(-10, 0)).to.eventually.throw(OutOfRangeError);
+        expect(calculateRange(4000, 5000)).to.eventually.throw(OutOfRangeError);
+        expect(calculateRange(1, 5000)).to.eventually.throw(OutOfRangeError);
+        expect(calculateRange(0, 200)).to.eventually.throw(OutOfRangeError);
+    })
+
+    it('calling with a min greater than max should throw InvalidInputError', async () => {
+        expect(calculateRange(4000, 1)).to.eventually.throw(InvalidRangeError);
+    })
+
+    it('calling with a min and max inside the range 1 - 3999 should return an array of roman numerals', async () => {
+        const result = await calculateRange(1, 3999);
+        expect(result).to.be.an('array');
+        expect(result.length).to.equal(3999);
+    })
 });
