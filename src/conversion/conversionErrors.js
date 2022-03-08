@@ -45,5 +45,20 @@ class MissingParameterError extends Error {
         this.name = 'MissingParameterError';
     }
 }
+/**
+ * InvalidRangeError
+ * is thrown when the range is not valid, meaning that min > max.
+ * @memberof DecimalToRomanConversion
+ */
+class InvalidRangeError extends Error {
+    /**
+     * Initializes a new InvalidRangeError, using the supplied message;
+     * @param {string} message is the supplied message to the error.
+     */
+    constructor (message) {
+        super(message);
+        this.name = 'InvalidRangeError';
+    }
+}
 
-module.exports = { OutOfRangeError, InvalidInputError, MissingParameterError };
+module.exports = { OutOfRangeError, InvalidInputError, MissingParameterError, InvalidRangeError };
