@@ -1,4 +1,5 @@
 const { assert, expect } = require('chai');
+const { decimalToRoman } = require('../conversion/decimalToRoman');
 
 describe('decimalToRoman: converting decimal numbers to romannumerals', () => {
     
