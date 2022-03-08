@@ -8,18 +8,18 @@ const { OutOfRangeError, InvalidInputError, MissingParameterError } = require('.
    * Converts a decimal number to a roman numeral
    * @info https://en.wikipedia.org/wiki/Roman_numerals
    * @info modified version of a function found in geeksforgeeks.org
-   * @param {Number} number an Integer between 1 and 255
+   * @param {Number} number an Integer between 1 and 3999
    * @returns the string representation of the number in roman numerals
    * @memberof DecimalToRomanConversion
    */
 function toRoman (number) {
     let roman = '';
 
-    const num = [1, 4, 5, 9, 10, 40, 50, 90, 100];
-    const sym = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C'];
+    const num = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000];
+    const sym = ['I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'XC', 'C', 'CD', 'D', 'CM', 'M'];
 
     // start from the last one, and work backwards
-    let i = 8;
+    let i = 12;
     while (number > 0) {
         let div = Math.floor(number / num[i]);
         number = number % num[i];
@@ -37,7 +37,7 @@ function toRoman (number) {
  * Converts a decimal number to a roman numeral, contains checks for valid input
  * @param {Number} num a number that is to be converted to roman numerals
  * @returns the string representation of the num in roman numerals
- * @throws {OutOfRangeError} if the number is outside of the range 1 - 255
+ * @throws {OutOfRangeError} if the number is outside of the range 1 - 3999
  * @throws {InvalidInputError} if the number is not an integer
  * @throws {MissingParameterError} if the number is not provided
  * @memberof DecimalToRomanConversion
@@ -57,8 +57,8 @@ function decimalToRoman (num) {
 
     // only positive numbers can be converted
     // imposing a limit on maximum value
-    if (num < 1 || num > 255) {
-        throw new OutOfRangeError('Cannot convert number out of range 1-255');
+    if (num < 1 || num > 3999) {
+        throw new OutOfRangeError('Cannot convert number out of range 1-3999');
     }
 
     return toRoman(num);

@@ -31,7 +31,7 @@ describe('GET /romannumeral', () => {
             (err, res) => {
                if (err) return done(err);
                res.body.should.have.property('error');
-               expect(res.body.error).to.equal('Cannot convert number out of range 1-255');
+               expect(res.body.error).to.equal('Cannot convert number out of range 1-3999');
                done();
             }
          )
@@ -45,7 +45,7 @@ describe('GET /romannumeral', () => {
             (err, res) => {
                if (err) return done(err);
                res.body.should.have.property('error');
-               expect(res.body.error).to.equal('Cannot convert number out of range 1-255');
+               expect(res.body.error).to.equal('Cannot convert number out of range 1-3999');
                done();
             }
          )
@@ -59,7 +59,7 @@ describe('GET /romannumeral', () => {
             (err, res) => {
                if (err) return done(err);
                res.body.should.have.property('error');
-               expect(res.body.error).to.equal('Cannot convert number out of range 1-255');
+               expect(res.body.error).to.equal('Cannot convert number out of range 1-3999');
                done();
             }
          )
