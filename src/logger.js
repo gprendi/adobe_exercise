@@ -8,11 +8,14 @@ const customFormat = format.combine(
     }));
 
 const customTransports = [
-    new transports.File({ filename: 'app.log', level: 'info' })
+    new transports.File({
+        filename: 'app.log',
+        level: process.env.NODE_ENV === 'production' ? 'warn' : 'info'
+    })
 ];
 
 if (process.env.NODE_ENV === 'development') {
-    customTransports.push(new transports.Console({ level: 'debug' }));
+    customTransports.push(new transports.Console({ level: 'info' }));
 }
 
 const logger = createLogger({
