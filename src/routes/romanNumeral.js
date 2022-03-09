@@ -1,4 +1,5 @@
 const { decimalToRoman, calculateRange } = require('../conversion/decimalToRoman');
+const logger = require('../logger');
 
 const { counter, histogram } = require('../monitor');
 /**
@@ -17,6 +18,7 @@ const router = require('express').Router();
 router.get('/', (req, res) => {
     const start = new Date();
     counter.inc();
+    logger.info('Roman numeral conversion request received and metrics counter incremented');
 
     // checks if query is provided
     if (req.query.query) {
@@ -28,15 +30,18 @@ router.get('/', (req, res) => {
         res.status(400).json({
             error: 'Range requires both a min and a max'
         });
+        logger.debug('Range did not receive both a min and a max from request');
     } else {
         // respond with an error if the query is not provided
         res.status(400).json({
             error: 'Please provide a query parameter'
         });
+        logger.debug('No query provided in request');
     }
 
     const end = new Date() - start;
     histogram.observe(end / 1000);
+    logger.info('Roman numeral conversion request completed and metrics histogram recorded');
 });
 
 
@@ -52,6 +57,7 @@ function respondSingle (res, decim) {
         res.status(400).json({
             error: 'Only integers can be converted to roman numerals'
         });
+        logger.debug('Roman numeral conversion unsuccessful and 400 response status with error sent');
         return;
     }
 
@@ -64,6 +70,7 @@ function respondSingle (res, decim) {
         res.status(400).json({
             error: err.message
         });
+        logger.debug('Roman numeral conversion unsuccessful and 400 response status with error sent');
         return;
     }
 
@@ -72,6 +79,8 @@ function respondSingle (res, decim) {
         input: decimal,
         output: result
     });
+
+    logger.debug('Roman numeral conversion successful and response sent');
 }
 
 async function respondRange (res, min, max) {
@@ -87,6 +96,7 @@ async function respondRange (res, min, max) {
         res.status(400).json({
             error: 'Only integers can be converted to roman numerals'
         });
+        logger.debug('Roman numeral conversion unsuccessful and 400 response status with error sent');
         return;
     }
 
@@ -99,6 +109,7 @@ async function respondRange (res, min, max) {
         res.status(400).json({
             error: err.message
         });
+        logger.debug('Roman numeral conversion unsuccessful and 400 response status with error sent');
         return;
     }
 
@@ -106,6 +117,8 @@ async function respondRange (res, min, max) {
     res.json({
         conversions: result
     });
+
+    logger.debug('Roman numeral range conversion successful and response sent');
 }
 
 module.exports = router;

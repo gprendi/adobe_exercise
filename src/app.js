@@ -5,6 +5,8 @@
 
 const express = require('express');
 const createError = require('http-errors');
+const logger = require('morgan');
+require('dotenv').config();
 
 const routers = require('./routes');
 require('./monitor'); // require monitoring
@@ -18,6 +20,10 @@ const app = express();
 
 app.use(express.json({ limit: '4MB' }));
 app.use(express.urlencoded({ extended: false }));
+
+if (process.env.NODE_ENV === 'development') {
+    app.use(logger('dev'));
+}
 
 app.use('/romannumeral', routers.romanNumeral);
 app.use('/metrics', routers.metrics);
