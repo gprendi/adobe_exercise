@@ -39,8 +39,10 @@
     "supertest": "6.2.2"
   },
   "dependencies": {
+    "csurf": "1.11.0",
     "dotenv": "16.0.0",
     "express": "4.17.3",
+    "helmet": "5.0.2",
     "http-errors": "2.0.0",
     "morgan": "1.10.0",
     "prom-client": "14.0.1",

@@ -4,6 +4,8 @@
  */
 
 const express = require('express');
+const helmet = require('helmet');
+const csrf = require('csurf');
 const createError = require('http-errors');
 const logger = require('morgan');
 require('dotenv').config();
@@ -20,6 +22,10 @@ const app = express();
 
 app.use(express.json({ limit: '4MB' }));
 app.use(express.urlencoded({ extended: false }));
+app.use(helmet());
+
+const csrfProtection = csrf({ cookie: true });
+
 
 if (process.env.NODE_ENV === 'development') {
     app.use(logger('dev'));
@@ -27,6 +33,9 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use('/romannumeral', routers.romanNumeral);
 app.use('/metrics', routers.metrics);
+
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     res.status(404).send(createError(404));
@@ -41,4 +50,5 @@ app.use(function (req, res, next) {
     res.status(500).end();
 });
 
+app.use(csrfProtection);
 module.exports = app;
