@@ -1,5 +1,6 @@
 const { decimalToRoman, calculateRange } = require('../conversion/decimalToRoman');
 
+const { counter, histogram } = require('../monitor');
 /**
  * Express router for the roman numeral conversion
  * @description Express router for the roman numeral conversion
@@ -14,6 +15,9 @@ const router = require('express').Router();
  * @name getRomanNumeral
  */
 router.get('/', (req, res) => {
+    const start = new Date();
+    counter.inc();
+
     // checks if query is provided
     if (req.query.query) {
         // convert query to integer, or throw if cannot be converted
@@ -30,6 +34,9 @@ router.get('/', (req, res) => {
             error: 'Please provide a query parameter'
         });
     }
+
+    const end = new Date() - start;
+    histogram.observe(end / 1000);
 });
 
 
