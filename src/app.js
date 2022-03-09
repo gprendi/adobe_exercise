@@ -7,6 +7,7 @@ const express = require('express');
 const createError = require('http-errors');
 
 const routers = require('./routes');
+require('./monitor'); // require monitoring
 
 /**
  * @typedef {Object} App;
@@ -19,7 +20,7 @@ app.use(express.json({ limit: '4MB' }));
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/romannumeral', routers.romanNumeral);
-
+app.use('/metrics', routers.metrics);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     res.status(404).send(createError(404));
