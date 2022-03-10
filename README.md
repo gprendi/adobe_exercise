@@ -92,6 +92,14 @@ To install dependecies
 To start nodejs application
 > `npm start`
 
+
+To package and ship the application in docker container
+> `docker build . -t adobe_exercise`
+
+> `docker run -d -p PORT:8080 adobe_exercise`
+
+* Where PORT is the port you want to map to localhost
+
 ## Scripts
 
 Provided scripts with a description
@@ -105,8 +113,8 @@ Provided scripts with a description
 | `npm run lint:fix` | Fixes errors and warning that the linter is able to fix |
 | `npm run docs` | Generate documentation from jsdoc comments in the code and outputs a static page in /docs |
 | `npm run test:nolint` | Only executes the test package with no linting | 
-| `npm run start:production | starts production serve with logger level set to a different level |
-| `npm run test:coverage | gives you a report of the test coverage |
+| `npm run start:production` | starts production server with logger level set to a different level |
+| `npm run test:coverage` | gives you a report of the test coverage |
 
 ## Dependencies
 
@@ -129,11 +137,14 @@ Using the magic of docker-compose
 
 To run the monitoring services and access metrics
 > `cd monitoring/`
+
 > `docker-compose up -d`
+
 > go to the browser and select localhost:3000 (default for grafana) 
+
 > select Application Telemetry dashboard and Adobe-Exercise
 
-Currently provided metric
+Currently provided metrics
 - Requests per second
 - Request Duration
 
