@@ -188,6 +188,7 @@ Automated Workflows:
     - logins to dockerhub using credentials
     - gets metadata from the repo, for naming and tagging
     - builds and pushes to dockerhub
+    - Deployed as gprendi30/adobe_exercise in dockerhub
 
 You can check the status of the workflows under the 'Actions' tab or by checking the tick(correct) or cross(wrong) mark near your commit hash after you push to the optional branch.
 
