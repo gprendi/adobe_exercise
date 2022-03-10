@@ -113,3 +113,8 @@ Here I will be providing only a small list of the most important dependencies us
 
 
 *NOTE this branch only contains the **base requirements** that were required from me to implement, but I took as a personal challenge to test myself and maybe win some extra points to also **implement the extras**, they can be found in the branch **optional***
+
+## Sources
+
+[Roman numerals explanation and definition](https://en.wikipedia.org/wiki/Roman_numerals)
+[Decimal to Roman numeral conversion algorithms](https://www.geeksforgeeks.org/converting-decimal-number-lying-between-1-to-3999-to-roman-numerals/)
